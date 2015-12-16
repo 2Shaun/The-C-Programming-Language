@@ -1,6 +1,8 @@
-# define	MAXLINE	1000
+# define MAXLINE 1000
 
-main(){
+/* find longest line */
+main()
+{
 	int len;
 	int max;
 
@@ -17,6 +19,7 @@ main(){
 		printf("%s", save);
 }
 
+/* get line into s, return length */
 getline(s, lim)
 char s[];
 int lim;
@@ -33,6 +36,7 @@ int lim;
 	return(i);
 }
 
+/* copy s1 to s2; assume s2 big enough */
 copy(s1, s2)
 char s1[], s2[];
 {
