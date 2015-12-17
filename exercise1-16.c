@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXLINE 1000	/* maximum input line size */
+#define MAXLINE 10	/* maximum input line size */
 
 int getliner(char line[], int maxline);
 void copy(char to[], char from[]);
@@ -30,14 +30,18 @@ int getliner(char s[], int lim)
 {
 	int c, i;
 
-	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
-		s[i] = c;
-	if (c == '\n') {
+	for (i=0; (c=getchar())!=EOF && c!='\n'; ++i)
+		if (i < lim-1)	
+			s[i] = c;
+	if (i > lim-1)
+		;
+	else if (c == '\n' && i < lim-1) {
 		s[i] = c;
 		++i;
+		s[i] = '\0';
 	}
-	s[i] = '\0';
-	return i;
+	printf("%s", s);
+	return i; 
 }
 
 /*copy: copy 'from' into 'to'; assume to is big enough */
