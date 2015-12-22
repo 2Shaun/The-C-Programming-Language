@@ -6,7 +6,7 @@ int getliner(char line[], int maxline);
 void copy(char to[], char from[]);
 
 /* print longest input line */
-main()
+int main()
 {
 	int len;	/* current line length */
 	int max;	/* maximum length seen so far */
