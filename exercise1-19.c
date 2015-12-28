@@ -27,9 +27,11 @@ int getliner(char s[], int lim)
 {
 	int c, i;
 
-	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
+	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; i++)
 		s[i] = c;
 	if (c == '\n') {
+		while (s[i-1] == ' ' || s[i-1] == '\t')
+			i--;
 		s[i] = c;
 		++i;
 	}
