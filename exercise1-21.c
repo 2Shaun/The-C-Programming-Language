@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #define MAXLINE 1000	/* maximum input line size */
+#define TABSTOP 8
 
 int getliner(char line[], int maxline);
 void copy(char to[], char from[]);
@@ -28,20 +29,36 @@ int main()
 /* getline: read a line into s, return length */
 int getliner(char s[], int lim)
 {
-	int c, i;
+	int c, i, ws, o, nt, ns;
 
-	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
-		s[i] = c;
-	if (c == '\n') {
-		if (s[0] == '\n')
-			return 0;
-		else if (s[i-1] == ' ' || s[i-1] == '\t')
-			s[i-1] = '\n';
+	/*for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
+		s[i] = c;*/
+	while ((c=getchar())!=EOF && c!= '\n'){
+		if (c == ' ')
+			ws++;
+		else if (c == '\t')
+			ws+=TABSTOP;
 		else{
+			nt = ws / TABSTOP;	
+			for( ; nt > 0; nt--){
+				s[i] = '\t';
+				i++;
+			}
+			ns = ws % TABSTOP;
+			for( ; ns > 0; ns--){
+				s[i] = ' ';
+				i++;
+			}
+			ws = 0;
 			s[i] = c;
-			i++;
+			++i;
 		}
-		
+	}
+	if (c == '\n') {
+		s[i] = c;
+		++i;
+	}else if (c == EOF){
+		return 0;
 	}
 	s[i] = '\0';
 	return i;

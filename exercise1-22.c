@@ -28,20 +28,20 @@ int main()
 /* getline: read a line into s, return length */
 int getliner(char s[], int lim)
 {
-	int c, i;
+	int c, i, folder;
 
-	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
+	for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i){
 		s[i] = c;
-	if (c == '\n') {
-		if (s[0] == '\n')
-			return 0;
-		else if (s[i-1] == ' ' || s[i-1] == '\t')
-			s[i-1] = '\n';
-		else{
-			s[i] = c;
-			i++;
+		folder++;
+		if (folder > 10 && c == ' '){
+			s[i]='\n';
+			folder = 0;
+			folder += i % 10;
 		}
-		
+	}
+	if (c == '\n') {
+		s[i] = c;
+		++i;
 	}
 	s[i] = '\0';
 	return i;
